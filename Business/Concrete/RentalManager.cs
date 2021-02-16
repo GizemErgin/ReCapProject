@@ -42,10 +42,16 @@ namespace Business.Concrete
             return new SuccessResult(Messages.RentalAdded);
         }
 
-        public IResult Delete(Rental rental)
+        public IResult Deliver(int rentId, DateTime dateTime)
         {
-            _rentalDal.Delete(rental);
-            return new SuccessResult(Messages.RentalDeleted);
+            var result = _rentalDal.Get(r=> r.Id==rentId && r.ReturnDate == null);
+            if (result.ReturnDate == null)
+            {
+                result.ReturnDate = dateTime;
+                _rentalDal.Update(result);
+                return new SuccessResult(Messages.RentalDelivered);
+            }
+            return new ErrorResult(Messages.RentalReturnDateIsNotNull);
         }
 
         public IResult Update(Rental rental)
@@ -64,8 +70,6 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll());
         }
 
-
-
         public IDataResult<List<RentalDetailDto>> GetRentalDetails()
         {
             return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails());
@@ -80,5 +84,6 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetailsByCustomerId(customerId));
         }
+
     }
 }

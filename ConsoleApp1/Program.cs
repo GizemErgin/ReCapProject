@@ -14,9 +14,7 @@ namespace ConsoleUI
 
         static void Main(string[] args)
         {
-
             Menu();
-
         }
 
 
@@ -329,13 +327,14 @@ namespace ConsoleUI
             RentalManager rentalManager = new RentalManager(new EfRentalDal());
             rentalManager.Rent(carId, customerId);
         }
-        private static void RentDelete()
+        private static void RentDeliver()
         {
             RentalManager rentalManager = new RentalManager(new EfRentalDal());
             RentalList();
-            Console.Write("Silmek istediğiniz Rent Id'si: ");
+            Console.Write("Teslim etme işlemini yapmak istediğiniz Rent Id: ");
             int id = int.Parse(Console.ReadLine());
-            rentalManager.Delete(new Rental { Id = id });
+            Console.WriteLine("Teslim tarihi: " + DateTime.Now);
+            rentalManager.Deliver(id, DateTime.Now);
         }
         private static void RentUpdate()
         {
@@ -393,6 +392,9 @@ namespace ConsoleUI
                 "Araç İşlemleri",
                 "Renk İşlemleri",
                 "Marka İşlemleri",
+                "Kullanıcı İşlemleri",
+                "Müşteri İşlemleri",
+                "Kiralama İşlemleri",
                 "Çıkış"
             };
 
@@ -425,6 +427,18 @@ namespace ConsoleUI
                 case "Marka İşlemleri":
                     indexMainMenu = 0;
                     BrandOperationsMenu();
+                    break;
+                case "Kullanıcı İşlemleri":
+                    indexMainMenu = 0;
+                    UserOperationsMenu();
+                    break;
+                case "Müşteri İşlemleri":
+                    indexMainMenu = 0;
+                    CustomerOperationsMenu();
+                    break;
+                case "Kiralama İşlemleri":
+                    indexMainMenu = 0;
+                    RentalOperationsMenu();
                     break;
                 case "Çıkış":
                     Environment.Exit(0);
@@ -684,7 +698,7 @@ namespace ConsoleUI
 
                 switch (selectedMenuItem)
                 {
-                    case "Kullanıcıları Listeleri":
+                    case "Kullanıcıları Listele":
                         UserList();
                         Console.WriteLine("");
                         break;
@@ -741,7 +755,7 @@ namespace ConsoleUI
                         CustomerList();
                         Console.WriteLine("");
                         break;
-                    case "ID'ye Göre Kullanıcı Detaylarını Listele":
+                    case "ID'ye Göre Müşteri Detaylarını Listele":
                         CustomerList();
                         Console.Write("Kullanıcı Id: ");
                         var customerId = int.Parse(Console.ReadLine());
@@ -775,8 +789,8 @@ namespace ConsoleUI
                 "Müşteriye Göre Listele",
                 "Arabaya Göre Listele",
                 "Kiralama İşlemi Ekle",
-                "Kiralama İşlemini Sil",
-                "Kiralama İşlemini Güncelle",
+                "Kiralanan Aracı Teslim Al",
+                "Kiralama Bilgilerini Güncelle",
                 "Çıkış"
             };
 
@@ -818,10 +832,10 @@ namespace ConsoleUI
                         int _customerId = int.Parse(Console.ReadLine());
                         RentAdd(_carId, _customerId);
                         break;
-                    case "Kiralama İşlemini Sil":
-                        RentDelete();
+                    case "Kiralanan Aracı Teslim Al":
+                        RentDeliver();
                         break;
-                    case "Kiralama İşlemini Güncelle":
+                    case "Kiralama Bilgilerini Güncelle":
                         RentUpdate();
                         break;
                     case "Çıkış":

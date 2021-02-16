@@ -24,7 +24,6 @@ namespace Business.Concrete
             return new SuccessResult(color.ColorId + " " + color.ColorName + Messages.ColorAdded);
         }
 
-
         public IResult Delete(Color color)
         {
             _colorDal.Delete(color);

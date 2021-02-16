@@ -30,9 +30,10 @@ namespace Business.Constants
         public static string CustomerUpdated = "Müşteri güncelleme işlemi başarıyla gerçekleşti.";
 
         public static string RentalAdded = "Araba kiralama işlemi başarıyla gerçekleşti.";
-        public static string RentalDeleted = "Araba kiralama işlemi başarıyla silindi.";
+        public static string RentalDelivered = "Araba teslim etme işlemi başarıyla gerçekleşti.";
         public static string RentalUpdated = "Kiralama işlemi başarıyla güncellendi.";
         public static string RentalReturnDateIsNull = "Araba henüz teslim edilmemiştir, kiralanamaz.";
+        public static string RentalReturnDateIsNotNull = "Araba zaten teslim edilmiştir, tekrar teslim işlemi yapılamaz.";
 
         public static string InvalidRequest = "Lütfen bilgileri kontrol edip, tekrar deneyin";
         public static string MaintenanceTime = "Sistem şu anda bakımdadır.";
