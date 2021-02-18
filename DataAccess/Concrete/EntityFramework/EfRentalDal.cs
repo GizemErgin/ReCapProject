@@ -29,8 +29,9 @@ namespace DataAccess.Concrete.EntityFramework
                                BrandName = b.BrandName,
                                CompanyName = cu.CompanyName,
                                Decription = c.Description,
-                               ModelYear = c.ModelYear
-                               
+                               ModelYear = c.ModelYear,
+                               RentDate = r.RentDate,
+                               ReturnDate = r.ReturnDate
                              };
 
                 return result.ToList();
@@ -85,6 +86,34 @@ namespace DataAccess.Concrete.EntityFramework
                                  Decription = c.Description,
                                  ModelYear = c.ModelYear
 
+                             };
+
+                return result.ToList();
+            }
+        }
+
+        public List<RentalDetailDto> GetRentalDetailsReturnDateIsNull()
+        {
+            using (CarDataContext context = new CarDataContext())
+            {
+                var result = from r in context.Rentals
+                             join c in context.Cars
+                             on r.CarId equals c.Id
+                             join b in context.Brands
+                             on c.BrandId equals b.BrandId
+                             join cu in context.Customers
+                             on r.CustomerId equals cu.Id
+                             where r.ReturnDate == null
+                             select new RentalDetailDto
+                             {
+                                 Id = r.Id,
+                                 CarId = r.CarId,
+                                 BrandName = b.BrandName,
+                                 CompanyName = cu.CompanyName,
+                                 Decription = c.Description,
+                                 ModelYear = c.ModelYear,
+                                 RentDate = r.RentDate,
+                                 ReturnDate = r.ReturnDate
                              };
 
                 return result.ToList();
