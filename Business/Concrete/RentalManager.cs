@@ -26,10 +26,10 @@ namespace Business.Concrete
             //{
             //    return new ErrorResult(Messages.RentalReturnDateIsNull);
             //}
-            var result = _rentalDal.Get(r=> r.CarId==carId);
+            var result = _rentalDal.Get(r=> r.CarId==carId && r.ReturnDate==null);
             if (result != null)
             {
-                return new ErrorResult("Araç kullanımda, kiralanamaz.");
+                return new ErrorResult(Messages.RentalReturnDateIsNull);
             }
             _rentalDal.Add(new Rental
             {
