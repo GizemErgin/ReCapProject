@@ -1,9 +1,13 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +22,7 @@ namespace Business.Concrete
         public CarManager(ICarDal carDal)
         {
             _carDal = carDal;
+
         }
 
         public IResult Delete(Car car)
@@ -25,33 +30,19 @@ namespace Business.Concrete
             _carDal.Delete(car);
             return new SuccessResult(Messages.CarDeleted);
         }
-
+        
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
-            if (car.DailyPrice > 0 && car.Description.Length > 2)
-            {
-                _carDal.Add(car);
-                return new SuccessResult(Messages.CarAdded);
-            }
-            else if (car.DailyPrice<=0)
-                return new ErrorResult(Messages.CarDailyPriceInvalid);
-            else if(car.Description.Length<=2)
-                return new ErrorResult(Messages.CarDescriptionInvalid);
-            else return new ErrorResult(Messages.InvalidRequest);
+            _carDal.Add(car);
+             return new SuccessResult(Messages.CarAdded);
         }
 
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Update(Car car)
         {
-            if (car.DailyPrice > 0 && car.Description.Length > 2)
-            {
-                _carDal.Add(car);
-                return new SuccessResult(Messages.CarUpdated);
-            }
-            else if (car.DailyPrice <= 0)
-                return new ErrorResult(Messages.CarDailyPriceInvalid);
-            else if (car.Description.Length <= 2)
-                return new ErrorResult(Messages.CarDescriptionInvalid);
-            else return new ErrorResult(Messages.InvalidRequest);
+            _carDal.Add(car);
+            return new SuccessResult(Messages.CarUpdated);
         }
 
         public IDataResult<Car> Get(int id)
