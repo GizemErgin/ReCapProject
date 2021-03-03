@@ -37,5 +37,11 @@ namespace Business.Constants
 
         public static string InvalidRequest = "Lütfen bilgileri kontrol edip, tekrar deneyin";
         public static string MaintenanceTime = "Sistem şu anda bakımdadır.";
+
+
+        internal static string CarImageAdded;
+        internal static string CarImageDeleted;
+        internal static string CarImageUpdated;
+        internal static string CarImageLimitError;
     }
 }

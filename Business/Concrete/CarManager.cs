@@ -41,7 +41,7 @@ namespace Business.Concrete
         [ValidationAspect(typeof(CarValidator))]
         public IResult Update(Car car)
         {
-            _carDal.Add(car);
+            _carDal.Update(car);
             return new SuccessResult(Messages.CarUpdated);
         }
 

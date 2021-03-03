@@ -23,6 +23,7 @@ namespace Business.DependencyResolves.Autofac
             builder.RegisterType<UserManager>().As<IUserManager>().SingleInstance();
             builder.RegisterType<CustomerManager>().As<ICustomerManager>().SingleInstance();
             builder.RegisterType<RentalManager>().As<IRentalManager>().SingleInstance();
+            builder.RegisterType<CarImageManager>().As<ICarImageManager>().SingleInstance();
 
             builder.RegisterType<EfCarDal>().As<ICarDal>().SingleInstance();
             builder.RegisterType<EfBrandDal>().As<IBrandDal>().SingleInstance();
@@ -30,6 +31,7 @@ namespace Business.DependencyResolves.Autofac
             builder.RegisterType<EfUserDal>().As<IUserDal>().SingleInstance();
             builder.RegisterType<EfCustomerDal>().As<ICustomerDal>().SingleInstance();
             builder.RegisterType<EfRentalDal>().As<IRentalDal>().SingleInstance();
+            builder.RegisterType<EfCarImageDal>().As<ICarImageDal>().SingleInstance();
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
