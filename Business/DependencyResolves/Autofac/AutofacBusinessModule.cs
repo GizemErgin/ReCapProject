@@ -4,6 +4,7 @@ using Business.Abstract;
 using Business.Concrete;
 using Castle.DynamicProxy;
 using Core.Utilities.Interceptors;
+using Core.Utilities.Security.JWT;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.EntityFrameWork;
@@ -24,6 +25,10 @@ namespace Business.DependencyResolves.Autofac
             builder.RegisterType<CustomerManager>().As<ICustomerManager>().SingleInstance();
             builder.RegisterType<RentalManager>().As<IRentalManager>().SingleInstance();
             builder.RegisterType<CarImageManager>().As<ICarImageManager>().SingleInstance();
+            builder.RegisterType<AuthManager>().As<IAuthManager>().SingleInstance();
+            builder.RegisterType<JwtHelper>().As<ITokenHelper>().SingleInstance();
+
+
 
             builder.RegisterType<EfCarDal>().As<ICarDal>().SingleInstance();
             builder.RegisterType<EfBrandDal>().As<IBrandDal>().SingleInstance();

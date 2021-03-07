@@ -1,4 +1,5 @@
 ﻿using Business.Concrete;
+using Core.Entities.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.EntityFrameWork;
@@ -227,7 +228,7 @@ namespace ConsoleUI
             var email = Console.ReadLine();
             Console.Write("Kullanıcı şifresi giriniz: ");
             var password = Console.ReadLine();
-            userManager.Add(new User() { FirstName=firstname, LastName=lastname, Email=email, Password=password});
+            //userManager.Add(new User() { FirstName=firstname, LastName=lastname, Email=email, Password=password});
         }
         private static void UserDelete()
         {
@@ -244,7 +245,7 @@ namespace ConsoleUI
             Console.WriteLine("Güncellemek istediğiniz kullanıcının Id'si: ");
             int id = int.Parse(Console.ReadLine());
             var userEntity = userManager.GetByUserId(id).Data;
-            Console.WriteLine(userEntity.FirstName +" "+userEntity.LastName+" "+userEntity.Email+" "+userEntity.Password);
+            Console.WriteLine(userEntity.FirstName +" "+userEntity.LastName+" "+userEntity.Email);
             Console.WriteLine("");
             Console.Write("İsmi güncelleyiniz: ");
             userEntity.FirstName = Console.ReadLine();
@@ -252,8 +253,6 @@ namespace ConsoleUI
             userEntity.LastName = Console.ReadLine();
             Console.Write("Email güncelleyiniz: ");
             userEntity.Email = Console.ReadLine();
-            Console.Write("Şifre güncelleyiniz: ");
-            userEntity.Password = Console.ReadLine();
             userManager.Update(userEntity);
         }
         private static void SelectByUserId(int userId)
