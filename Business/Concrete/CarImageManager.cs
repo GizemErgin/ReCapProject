@@ -1,6 +1,10 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Performance;
+using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Business;
 using Core.Utilities.Helpers;
@@ -15,6 +19,7 @@ using System.Text;
 
 namespace Business.Concrete
 {
+    
     public class CarImageManager : ICarImageManager
     {
         ICarImageDal _carImageDal;
@@ -24,7 +29,10 @@ namespace Business.Concrete
             _carImageDal = carImageDal;
         }
 
-       // [ValidationAspect(typeof(CarImageValidator))]
+        [TransactionScopeAspect]
+        [CacheRemoveAspect("ICarImageManager.Get")]
+        [SecuredOperation("admin,carimages.admin")]
+        //[ValidationAspect(typeof(CarImageValidator))]
         public IResult Add(IFormFile file, CarImage carImage)
         {
             IResult result = BusinessRules.Run(CheckIfCarImageLimitOfCorrect(carImage.CarId));
@@ -41,6 +49,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarImageAdded);
         }
 
+        [SecuredOperation("admin,carimages.admin")]
         public IResult Delete(CarImage carImage)
         {
             FileHelper.Delete(carImage.ImagePath);
@@ -48,7 +57,10 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarImageDeleted);
         }
 
-       // [ValidationAspect(typeof(CarImageValidator))]
+        [TransactionScopeAspect]
+        [CacheRemoveAspect("ICarImageManager.Get")]
+        [SecuredOperation("admin,carimages.admin")]
+        // [ValidationAspect(typeof(CarImageValidator))]
         public IResult Update(IFormFile file, CarImage carImage)
         {
             IResult result = BusinessRules.Run(CheckIfCarImageLimitOfCorrect(carImage.CarId));
@@ -69,6 +81,8 @@ namespace Business.Concrete
             return new SuccessDataResult<CarImage>(_carImageDal.Get(c => c.Id == id));
         }
 
+        [PerformanceAspect(5)]
+        [CacheAspect]
         public IDataResult<List<CarImage>> GetAll()
         {
             return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll());
@@ -101,6 +115,7 @@ namespace Business.Concrete
             }
             return new List<CarImage> { new CarImage { CarId = carId, ImagePath = path, DateTime = DateTime.Now } };
         }
+ 
 
     }
 }

@@ -1,5 +1,9 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Performance;
+using Core.Aspects.Autofac.Transaction;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -10,6 +14,7 @@ using System.Text;
 
 namespace Business.Concrete
 {
+    
     public class RentalManager : IRentalManager
     {
         IRentalDal _rentalDal;
@@ -19,6 +24,9 @@ namespace Business.Concrete
             _rentalDal = rentalDal;
         }
 
+        [TransactionScopeAspect]
+        [CacheRemoveAspect("IRentalManager.Get")]
+        [SecuredOperation("admin,rental.admin")]
         public IResult Rent(int carId, int customerId)
         {
             //var result = _rentalDal.GetAll(r => r.CarId == carId && r.ReturnDate == null);
@@ -42,6 +50,8 @@ namespace Business.Concrete
             return new SuccessResult(Messages.RentalAdded);
         }
 
+        [TransactionScopeAspect]
+        [SecuredOperation("admin,rental.admin")]
         public IResult Deliver(int rentId, DateTime dateTime)
         {
             var result = _rentalDal.Get(r=> r.Id==rentId && r.ReturnDate == null);
@@ -54,6 +64,9 @@ namespace Business.Concrete
             return new ErrorResult(Messages.RentalReturnDateIsNotNull);
         }
 
+        [TransactionScopeAspect]
+        [CacheRemoveAspect("IRentalManager.Get")]
+        [SecuredOperation("admin,rental.admin")]
         public IResult Update(Rental rental)
         {
             _rentalDal.Update(rental);
@@ -65,16 +78,21 @@ namespace Business.Concrete
             return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.Id == id));
         }
 
+        [PerformanceAspect(5)]
+        [CacheAspect]
         public IDataResult<List<Rental>> GetAll()
         {
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll());
         }
 
+        [PerformanceAspect(5)]
+        [CacheAspect]
         public IDataResult<List<RentalDetailDto>> GetRentalDetails()
         {
             return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails());
         }
 
+        [CacheAspect]
         public IDataResult<List<RentalDetailDto>> GetRentalDetailsReturnDateIsNull()
         {
             
@@ -90,6 +108,7 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetailsByCustomerId(customerId));
         }
+
 
     }
 }
