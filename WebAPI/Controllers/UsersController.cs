@@ -37,27 +37,27 @@ namespace WebAPI.Controllers
         }
 
         //---POST
-        [HttpPost("add")]
-        public IActionResult Add(User user)
-        {
-            var result = _userManager.Add(user);
-            if (result.Success) { return Ok(result); }
-            return BadRequest(result);
-        }
-        [HttpPost("delete")]
-        public IActionResult Delete(User user)
-        {
-            var result = _userManager.Delete(user);
-            if (result.Success) { return Ok(result); }
-            return BadRequest(result);
-        }
-        [HttpPost("update")]
-        public IActionResult Update(User user)
-        {
-            var result = _userManager.Update(user);
-            if (result.Success) { return Ok(result); }
-            return BadRequest(result);
-        }
+        //[HttpPost("add")]
+        //public IActionResult Add(User user)
+        //{
+        //    var result = _userManager.Add(user);
+        //    if (result.Success) { return Ok(result); }
+        //    return BadRequest(result);
+        //}
+        //[HttpPost("delete")]
+        //public IActionResult Delete(User user)
+        //{
+        //    var result = _userManager.Delete(user);
+        //    if (result.Success) { return Ok(result); }
+        //    return BadRequest(result);
+        //}
+        //[HttpPost("update")]
+        //public IActionResult Update(User user)
+        //{
+        //    var result = _userManager.Update(user);
+        //    if (result.Success) { return Ok(result); }
+        //    return BadRequest(result);
+        //}
 
     }
 }

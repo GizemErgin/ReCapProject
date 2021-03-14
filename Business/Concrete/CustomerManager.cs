@@ -7,6 +7,7 @@ using Core.Aspects.Autofac.Transaction;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -23,7 +24,7 @@ namespace Business.Concrete
         }
 
         [CacheRemoveAspect("ICustomerManager.Get")]
-        [SecuredOperation("admin,customer.admin")]
+        //[SecuredOperation("admin,customer.admin")]
         public IResult Add(Customer customer)
         {
             _customerDal.Add(customer);
@@ -63,6 +64,11 @@ namespace Business.Concrete
             _customerDal.Add(customer);
             _customerDal.Update(customer);
             return null;
+        }
+
+        public IDataResult<List<CustomerDetailDto>> GetCustomerDetails()
+        {
+            return new SuccessDataResult<List<CustomerDetailDto>>(_customerDal.GetCustomerDetails());
         }
     }
 }

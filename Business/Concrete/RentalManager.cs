@@ -26,7 +26,7 @@ namespace Business.Concrete
 
         [TransactionScopeAspect]
         [CacheRemoveAspect("IRentalManager.Get")]
-        [SecuredOperation("admin,rental.admin")]
+        //[SecuredOperation("admin,rental.admin")]
         public IResult Rent(int carId, int customerId)
         {
             //var result = _rentalDal.GetAll(r => r.CarId == carId && r.ReturnDate == null);

@@ -41,6 +41,8 @@ namespace WebAPI
                 c.SchemaFilter<SwaggerSkipPropertyFilter>();
             });
 
+            services.AddCors();
+
             var tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -77,6 +79,8 @@ namespace WebAPI
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
+
+            app.UseCors(builder=> builder.WithOrigins("http://localhost:4200").AllowAnyHeader());
 
             app.UseHttpsRedirection();
 

@@ -30,7 +30,7 @@ namespace DataAccess.Concrete.EntityFrameWork
                                  ModelYear = c.ModelYear,
                                  ColorName = cl.ColorName,
                                  DailyPrice = c.DailyPrice,
-                                 Decription = c.Description
+                                 Description = c.Description
                              };
 
                 return result.ToList();
@@ -54,7 +54,7 @@ namespace DataAccess.Concrete.EntityFrameWork
                                  ModelYear = c.ModelYear,
                                  ColorName = cl.ColorName,
                                  DailyPrice = c.DailyPrice,
-                                 Decription = c.Description
+                                 Description = c.Description
                              };
 
                 return result.ToList();
@@ -78,7 +78,7 @@ namespace DataAccess.Concrete.EntityFrameWork
                                  ModelYear = c.ModelYear,
                                  ColorName = cl.ColorName,
                                  DailyPrice = c.DailyPrice,
-                                 Decription = c.Description
+                                 Description = c.Description
                              };
 
                 return result.ToList();

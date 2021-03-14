@@ -22,6 +22,8 @@ namespace DataAccess.Concrete.EntityFramework
                              on c.BrandId equals b.BrandId
                              join cu in context.Customers
                              on r.CustomerId equals cu.Id
+                             join u in context.Users
+                             on cu.UserId equals u.Id
                              select new RentalDetailDto
                              {
                                Id=r.Id,
@@ -31,7 +33,10 @@ namespace DataAccess.Concrete.EntityFramework
                                Decription = c.Description,
                                ModelYear = c.ModelYear,
                                RentDate = r.RentDate,
-                               ReturnDate = r.ReturnDate
+                               ReturnDate = r.ReturnDate,
+                               DailyPrice = c.DailyPrice,
+                               FirstName = u.FirstName,
+                               LastName = u.LastName
                              };
 
                 return result.ToList();
@@ -49,6 +54,8 @@ namespace DataAccess.Concrete.EntityFramework
                              on c.BrandId equals b.BrandId
                              join cu in context.Customers
                              on r.CustomerId equals cu.Id
+                             join u in context.Users
+                             on cu.UserId equals u.Id
                              where r.CarId==carId
                              select new RentalDetailDto
                              {
@@ -57,7 +64,12 @@ namespace DataAccess.Concrete.EntityFramework
                                  BrandName = b.BrandName,
                                  CompanyName = cu.CompanyName,
                                  Decription = c.Description,
-                                 ModelYear = c.ModelYear
+                                 ModelYear = c.ModelYear,
+                                 RentDate = r.RentDate,
+                                 ReturnDate = r.ReturnDate,
+                                 DailyPrice = c.DailyPrice,
+                                 FirstName = u.FirstName,
+                                 LastName = u.LastName
 
                              };
 
@@ -76,6 +88,8 @@ namespace DataAccess.Concrete.EntityFramework
                              on c.BrandId equals b.BrandId
                              join cu in context.Customers
                              on r.CustomerId equals cu.Id
+                             join u in context.Users
+                             on cu.UserId equals u.Id
                              where r.CustomerId==customerId
                              select new RentalDetailDto
                              {
@@ -84,7 +98,12 @@ namespace DataAccess.Concrete.EntityFramework
                                  BrandName = b.BrandName,
                                  CompanyName = cu.CompanyName,
                                  Decription = c.Description,
-                                 ModelYear = c.ModelYear
+                                 ModelYear = c.ModelYear,
+                                 RentDate = r.RentDate,
+                                 ReturnDate = r.ReturnDate,
+                                 DailyPrice = c.DailyPrice,
+                                 FirstName = u.FirstName,
+                                 LastName = u.LastName
 
                              };
 
@@ -103,6 +122,8 @@ namespace DataAccess.Concrete.EntityFramework
                              on c.BrandId equals b.BrandId
                              join cu in context.Customers
                              on r.CustomerId equals cu.Id
+                             join u in context.Users
+                             on cu.UserId equals u.Id
                              where r.ReturnDate == null
                              select new RentalDetailDto
                              {
@@ -113,7 +134,10 @@ namespace DataAccess.Concrete.EntityFramework
                                  Decription = c.Description,
                                  ModelYear = c.ModelYear,
                                  RentDate = r.RentDate,
-                                 ReturnDate = r.ReturnDate
+                                 ReturnDate = r.ReturnDate,
+                                 DailyPrice = c.DailyPrice,
+                                 FirstName = u.FirstName,
+                                 LastName = u.LastName
                              };
 
                 return result.ToList();

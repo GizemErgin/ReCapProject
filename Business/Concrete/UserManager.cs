@@ -23,7 +23,7 @@ namespace Business.Concrete
             _userDal = userDal;
         }
 
-        [SecuredOperation("admin,user.admin")]
+        //[SecuredOperation("admin,user.admin")]
         public IResult Delete(User user)
         {
             _userDal.Delete(user);
@@ -31,7 +31,7 @@ namespace Business.Concrete
         }
 
         [CacheRemoveAspect("IUserManager.Get")]
-        [SecuredOperation("admin,user.admin")]
+        //[SecuredOperation("admin,user.admin")]
         public IResult Add(User user)
         {
             _userDal.Add(user);
@@ -39,7 +39,7 @@ namespace Business.Concrete
         }
 
         [CacheRemoveAspect("IUserManager.Get")]
-        [SecuredOperation("admin,user.admin")]
+        //[SecuredOperation("admin,user.admin")]
         public IResult Update(User user)
         {
             _userDal.Update(user);
