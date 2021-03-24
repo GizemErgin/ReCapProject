@@ -117,5 +117,10 @@ namespace Business.Concrete
             _carDal.Update(car);
             return null;
         }
+
+        public IDataResult<List<CarDetailDto>> GetCarDetailsById(int carId)
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetailsById(carId));
+        }
     }
 }

@@ -31,7 +31,7 @@ namespace Business.Concrete
 
         [TransactionScopeAspect]
         [CacheRemoveAspect("ICarImageManager.Get")]
-        [SecuredOperation("admin,carimages.admin")]
+    //    [SecuredOperation("admin,carimages.admin")]
         //[ValidationAspect(typeof(CarImageValidator))]
         public IResult Add(IFormFile file, CarImage carImage)
         {
