@@ -20,7 +20,7 @@ namespace Core.Utilities.Helpers
                 }
             }
             var result = NewPath(file);
-            File.Move(sourcepath, result);
+            File.Move(sourcepath, @"wwwroot" + result);
             return result;
         }
 
@@ -58,7 +58,7 @@ namespace Core.Utilities.Helpers
             FileInfo fileInfo = new FileInfo(file.FileName);
             string fileExtension = fileInfo.Extension;
             var newPath = Guid.NewGuid().ToString() + "_" + DateTime.Now.Month + " " + DateTime.Now.Day + " " + DateTime.Now.Year + fileExtension;
-            string result = $@"wwwroot\Images\{newPath}";
+            string result = $@"\Images\{newPath}";
             return result;
         }
     }

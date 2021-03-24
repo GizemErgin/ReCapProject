@@ -55,7 +55,9 @@ namespace DataAccess.Concrete.EntityFrameWork
                                  ModelYear = c.ModelYear,
                                  ColorName = cl.ColorName,
                                  DailyPrice = c.DailyPrice,
-                                 Description = c.Description
+                                 Description = c.Description,
+                                 ImagePath = (from a in context.CarImages where a.CarId == c.Id select a.ImagePath).FirstOrDefault()
+
                              };
 
                 return result.ToList();
@@ -79,7 +81,36 @@ namespace DataAccess.Concrete.EntityFrameWork
                                  ModelYear = c.ModelYear,
                                  ColorName = cl.ColorName,
                                  DailyPrice = c.DailyPrice,
-                                 Description = c.Description
+                                 Description = c.Description,
+                                 ImagePath = (from a in context.CarImages where a.CarId == c.Id select a.ImagePath).FirstOrDefault()
+
+                             };
+
+                return result.ToList();
+            }
+        }
+
+        public List<CarDetailDto> GetCarDetailsByBrandAndColor(int brandId, int colorId)
+        {
+            using (CarDataContext context = new CarDataContext())
+            {
+                var result = from c in context.Cars
+                             join b in context.Brands
+                             on c.BrandId equals b.BrandId
+                             join cl in context.Colors
+                             on c.ColorId equals cl.ColorId
+                             where c.BrandId == brandId
+                             where c.ColorId == colorId
+                             select new CarDetailDto
+                             {
+                                 Id = c.Id,
+                                 BrandName = b.BrandName,
+                                 ModelYear = c.ModelYear,
+                                 ColorName = cl.ColorName,
+                                 DailyPrice = c.DailyPrice,
+                                 Description = c.Description,
+                                 ImagePath = (from a in context.CarImages where a.CarId == c.Id select a.ImagePath).FirstOrDefault()
+
                              };
 
                 return result.ToList();

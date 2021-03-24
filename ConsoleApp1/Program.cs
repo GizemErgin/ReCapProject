@@ -60,7 +60,7 @@ namespace ConsoleUI
             CarManager carManager = new CarManager(new EfCarDal());
             foreach (var car in carManager.GetCarDetailsByColorId(colorId).Data)
             {
-                Console.WriteLine(car.Id + " "+ car.BrandName + " " + car.ModelYear+ " "+ car.ColorName + " " + car.DailyPrice + "TL Günlük "+ car.Decription);
+                Console.WriteLine(car.Id + " "+ car.BrandName + " " + car.ModelYear+ " "+ car.ColorName + " " + car.DailyPrice + "TL Günlük ");
             }
         }
         private static void ColorList()
@@ -86,7 +86,7 @@ namespace ConsoleUI
             CarManager carManager = new CarManager(new EfCarDal());
             foreach (var car in carManager.GetCarDetailsByBrandId(brandId).Data)
             {
-                Console.WriteLine(car.Id + " " + car.BrandName + " " + car.ModelYear+ " " + car.ColorName + " " + car.DailyPrice + "TL Günlük " + car.Decription);
+                Console.WriteLine(car.Id + " " + car.BrandName + " " + car.ModelYear+ " " + car.ColorName + " " + car.DailyPrice + "TL Günlük ");
             }
         }
         private static void BrandAdd()
