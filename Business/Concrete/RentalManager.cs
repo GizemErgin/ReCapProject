@@ -27,26 +27,13 @@ namespace Business.Concrete
         [TransactionScopeAspect]
         [CacheRemoveAspect("IRentalManager.Get")]
         //[SecuredOperation("admin,rental.admin")]
-        public IResult Rent(int carId, int customerId)
+        public IResult Rent(Rental rental)
         {
-            //var result = _rentalDal.GetAll(r => r.CarId == carId && r.ReturnDate == null);
-            //if (result.Count > 0)
-            //{
-            //    return new ErrorResult(Messages.RentalReturnDateIsNull);
-            //}
-            var result = _rentalDal.Get(r=> r.CarId==carId && r.ReturnDate==null);
-            if (result != null)
+            if (!_rentalDal.CheckCarStatus(rental.CarId, rental.RentDate, rental.ReturnDate))
             {
                 return new ErrorResult(Messages.RentalReturnDateIsNull);
             }
-            _rentalDal.Add(new Rental
-            {
-                CarId = carId,
-                CustomerId = customerId,
-                RentDate = DateTime.Now,
-                ReturnDate = null
-            });
-            
+            _rentalDal.Add(rental);
             return new SuccessResult(Messages.RentalAdded);
         }
 
@@ -86,7 +73,7 @@ namespace Business.Concrete
         }
 
         [PerformanceAspect(5)]
-        [CacheAspect]
+        // [CacheAspect]
         public IDataResult<List<RentalDetailDto>> GetRentalDetails()
         {
             return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails());
@@ -109,6 +96,14 @@ namespace Business.Concrete
             return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetailsByCustomerId(customerId));
         }
 
+        public IResult CheckCarStatus(Rental rental)
+        {
+            if (_rentalDal.CheckCarStatus(rental.CarId, rental.RentDate, rental.ReturnDate))
+            {
+                return new SuccessResult(Messages.RentalDateOk);
+            }
+            return new ErrorResult(Messages.RentalReturnDateIsNull);
+        }
 
     }
 }

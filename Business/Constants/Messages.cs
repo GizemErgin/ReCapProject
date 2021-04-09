@@ -52,7 +52,10 @@ namespace Business.Constants
         public static string SuccessfulLogin = "Sisteme giriş başarılı.";
         public static string PasswordError="Şifre hatalıdır.";
         public static string UserNotFound = "Kullanıcı bulunamadı.";
+        public static string UserRegistered = "Kullanıcı eklendi.";
 
-        public static string UserRegistered { get; internal set; }
+        public static string PaymentAdded = "Ödeme aracı eklendi.";
+
+        public static string RentalDateOk = "Araba istenen tarihlerde işlenebilir.";
     }
 }

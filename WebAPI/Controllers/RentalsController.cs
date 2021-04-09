@@ -58,9 +58,9 @@ namespace WebAPI.Controllers
 
         //---POST
         [HttpPost("rent")]
-        public IActionResult Rent(int carId, int customerId)
+        public IActionResult Rent(Rental rental)
         {
-            var result = _rentalManager.Rent(carId, customerId);
+            var result = _rentalManager.Rent(rental);
             if (result.Success) { return Ok(result); }
             return BadRequest(result);
         }
@@ -77,6 +77,17 @@ namespace WebAPI.Controllers
         {
             var result = _rentalManager.Update(rental);
             if (result.Success) { return Ok(result); }
+            return BadRequest(result);
+        }
+
+        [HttpPost("checkcarstatus")]
+        public IActionResult CheckCarStatus(Rental rental)
+        {
+            var result = _rentalManager.CheckCarStatus(rental);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
             return BadRequest(result);
         }
 

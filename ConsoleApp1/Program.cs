@@ -321,10 +321,10 @@ namespace ConsoleUI
         }
 
         //RentalOperations
-        private static void RentAdd(int carId, int customerId)
+        private static void RentAdd(Rental rental)
         {
             RentalManager rentalManager = new RentalManager(new EfRentalDal());
-            rentalManager.Rent(carId, customerId);
+            rentalManager.Rent(rental);
         }
         private static void RentDeliver()
         {
@@ -837,7 +837,7 @@ namespace ConsoleUI
                         CustomerList();
                         Console.Write("\nHangi müşteriye kiralanacak? Müşteri Id'si giriniz: ");
                         int _customerId = int.Parse(Console.ReadLine());
-                        RentAdd(_carId, _customerId);
+                        //RentAdd(rental);
                         break;
                     case "Kiralanan Aracı Teslim Al":
                         RentDeliver();
