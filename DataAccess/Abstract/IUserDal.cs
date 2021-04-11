@@ -11,6 +11,7 @@ namespace DataAccess.Abstract
     {
 
        List<OperationClaim> GetClaims(User user);
+       OperationClaim GetClaimById(int userId);
 
     }
 }

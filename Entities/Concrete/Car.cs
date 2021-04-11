@@ -13,6 +13,7 @@ namespace Entities.Concrete
         public int ModelYear { get; set; }
         public Decimal DailyPrice { get; set; }
         public string Description { get; set; }
+        public int Findeks { get; set; }
         public List<Rental> Rentals { get; set; }
     }
 }

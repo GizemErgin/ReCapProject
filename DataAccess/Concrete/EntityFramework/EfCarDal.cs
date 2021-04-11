@@ -31,6 +31,7 @@ namespace DataAccess.Concrete.EntityFrameWork
                                  ColorName = cl.ColorName,
                                  DailyPrice = c.DailyPrice,
                                  Description = c.Description,
+                                 Findeks = c.Findeks,
                                  ImagePath = (from a in context.CarImages where a.CarId == c.Id select a.ImagePath).FirstOrDefault()
                              };
 
@@ -56,6 +57,7 @@ namespace DataAccess.Concrete.EntityFrameWork
                                  ColorName = cl.ColorName,
                                  DailyPrice = c.DailyPrice,
                                  Description = c.Description,
+                                 Findeks = c.Findeks,
                                  ImagePath = (from a in context.CarImages where a.CarId == c.Id select a.ImagePath).FirstOrDefault()
 
                              };
@@ -82,6 +84,7 @@ namespace DataAccess.Concrete.EntityFrameWork
                                  ColorName = cl.ColorName,
                                  DailyPrice = c.DailyPrice,
                                  Description = c.Description,
+                                 Findeks = c.Findeks,
                                  ImagePath = (from a in context.CarImages where a.CarId == c.Id select a.ImagePath).FirstOrDefault()
 
                              };
@@ -109,6 +112,7 @@ namespace DataAccess.Concrete.EntityFrameWork
                                  ColorName = cl.ColorName,
                                  DailyPrice = c.DailyPrice,
                                  Description = c.Description,
+                                 Findeks = c.Findeks,
                                  ImagePath = (from a in context.CarImages where a.CarId == c.Id select a.ImagePath).FirstOrDefault()
 
                              };
@@ -135,6 +139,7 @@ namespace DataAccess.Concrete.EntityFrameWork
                                  ColorName = cl.ColorName,
                                  DailyPrice = c.DailyPrice,
                                  Description = c.Description,
+                                 Findeks = c.Findeks,
                                  ImagePath = (from a in context.CarImages where a.CarId == c.Id select a.ImagePath).FirstOrDefault()
                              };
 

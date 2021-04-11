@@ -27,6 +27,7 @@ namespace WebAPI.Controllers
             if (result.Success) { return Ok(result);}
             return BadRequest(result);
         }
+
         [HttpGet("getbycustomerid")]
         public IActionResult GetByCustomerId(int customerId)
         {
@@ -35,10 +36,35 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
+        [HttpGet("getcustomerbyuserid")]
+        public IActionResult GetByUserId(int userId)
+        {
+            var result = _customerManager.GetByUserId(userId);
+            if (result.Success) { return Ok(result); }
+            return BadRequest(result);
+        }
+
+
         [HttpGet("getcustomerdetails")]
         public IActionResult GetCustomerDetails()
         {
             var result = _customerManager.GetCustomerDetails();
+            if (result.Success) { return Ok(result); }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getcustomerdetailsbyid")]
+        public IActionResult GetCustomerDetailsById(int customerId)
+        {
+            var result = _customerManager.GetCustomerDetailsById(customerId);
+            if (result.Success) { return Ok(result); }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getcustomerdetailsbyuserid")]
+        public IActionResult GetCustomerDetailsByUserId(int userId)
+        {
+            var result = _customerManager.GetCustomerDetailsByUserId(userId);
             if (result.Success) { return Ok(result); }
             return BadRequest(result);
         }

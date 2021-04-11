@@ -47,7 +47,7 @@ namespace Business.Constants
         public static string CarImageLimitError = "Bir arabanın en fazla 5 resmi olabilir.";
 
         public static string AuthorizationDenied = "Bu işlemi yapmak için yetkiniz bulunmamaktadır.";
-        public static string AccessTokenCreated= "Access token başarıyla oluşturuldu.";
+        public static string AccessTokenCreated= "Sisteme giriş yapıldı.";
         public static string UserAlreadyExists = "Bu kullanıcı zaten mevcut.";
         public static string SuccessfulLogin = "Sisteme giriş başarılı.";
         public static string PasswordError="Şifre hatalıdır.";
@@ -57,5 +57,7 @@ namespace Business.Constants
         public static string PaymentAdded = "Ödeme aracı eklendi.";
 
         public static string RentalDateOk = "Araba istenen tarihlerde işlenebilir.";
+
+        public static string FindeksScoreIsNotEnough = "Findeks puanınız kiralamak istediğiniz araç için yeterli değildir.";
     }
 }

@@ -321,75 +321,75 @@ namespace ConsoleUI
         }
 
         //RentalOperations
-        private static void RentAdd(Rental rental)
-        {
-            RentalManager rentalManager = new RentalManager(new EfRentalDal());
-            rentalManager.Rent(rental);
-        }
-        private static void RentDeliver()
-        {
-            RentalManager rentalManager = new RentalManager(new EfRentalDal());
-            RentalReturnDateIsNullList();
-            Console.Write("\nTeslim etme işlemini yapmak istediğiniz Rent Id: ");
-            int id = int.Parse(Console.ReadLine());
-            Console.WriteLine("Teslim tarihi: " + DateTime.Now);
-            rentalManager.Deliver(id, DateTime.Now);
-        }
-        private static void RentUpdate()
-        {
-            RentalManager rentalManager = new RentalManager(new EfRentalDal());
-            RentalFullList();
-            Console.WriteLine("Güncellemek istediğiniz verilerin Rent Id'si: ");
-            int id = int.Parse(Console.ReadLine());
-            var rentalEntity = rentalManager.Get(id).Data;
-            Console.WriteLine(rentalEntity.CarId + " " + rentalEntity.CustomerId + " " + rentalEntity.RentDate + " "+ rentalEntity.ReturnDate);
-            Console.WriteLine("");
-            CarList();
-            Console.Write("Araba Id'si güncelleyiniz: ");
-            rentalEntity.CarId = int.Parse(Console.ReadLine());
-            CustomerList();
-            Console.Write("Müşteri Id'si güncelleyiniz: ");
-            rentalEntity.CustomerId = int.Parse(Console.ReadLine());
-            Console.Write("Kiralama tarihini güncelleyiniz: ");
-            rentalEntity.RentDate = DateTime.Parse(Console.ReadLine());
-            Console.Write("Teslim etme tarihini güncelleyiniz. Teslim edilmesiyse boş bırakınız:  ");
-            rentalEntity.ReturnDate = DateTime.Parse(Console.ReadLine());
-            rentalManager.Update(rentalEntity);
-        }
-        private static void ListRentalByCustomerId(int customerId)
-        {
-            RentalManager rentalManager = new RentalManager(new EfRentalDal());
-            var rentalEntity = rentalManager.GetRentalDetailsByCustomerId(customerId).Data;
-            foreach (var rent in rentalEntity)
-            {
-                Console.WriteLine(rent.Id + " " + rent.ModelYear + " " + rent.BrandName + " " +rent.Decription + " " + "Kiralanan Firma: " + rent.CompanyName);
-            }
-        }
-        private static void ListRentalByCarId(int carId)
-        {
-            RentalManager rentalManager = new RentalManager(new EfRentalDal());
-            var rentalEntity = rentalManager.GetRentalDetailsByCarId(carId).Data;
-            foreach (var rent in rentalEntity)
-            {
-                Console.WriteLine(rent.Id + " " + rent.ModelYear + " " + rent.BrandName + " " + rent.Decription + " " + "Kiralanan Firma: " + rent.CompanyName);
-            }
-        }
-        private static void RentalFullList()
-        {
-            RentalManager rentalManager = new RentalManager(new EfRentalDal());
-            foreach (var rent in rentalManager.GetRentalDetails().Data)
-            {
-                Console.WriteLine(rent.Id + " " + rent.ModelYear + " " + rent.BrandName + rent.Decription + " " + "Kiralanan Firma: " + rent.CompanyName + " Kiralama Tarihi: "+ rent.RentDate + " Teslim Edilme Tarihi: " +rent.ReturnDate);
-            }
-        }
-        private static void RentalReturnDateIsNullList()
-        {
-            RentalManager rentalManager = new RentalManager(new EfRentalDal());
-            foreach (var rent in rentalManager.GetRentalDetailsReturnDateIsNull().Data)
-            {
-                Console.WriteLine(rent.Id + " " + rent.ModelYear + " " + rent.BrandName + rent.Decription + " " + " Kiralanan Firma: " + rent.CompanyName + " Kiralama Tarihi: " + rent.RentDate + " Teslim Edilme Tarihi: " + rent.ReturnDate);
-            }
-        }
+        //private static void RentAdd(Rental rental)
+        //{
+        //    RentalManager rentalManager = new RentalManager(new EfRentalDal());
+        //    rentalManager.Rent(rental);
+        //}
+        //private static void RentDeliver()
+        //{
+        //    RentalManager rentalManager = new RentalManager(new EfRentalDal());
+        //    RentalReturnDateIsNullList();
+        //    Console.Write("\nTeslim etme işlemini yapmak istediğiniz Rent Id: ");
+        //    int id = int.Parse(Console.ReadLine());
+        //    Console.WriteLine("Teslim tarihi: " + DateTime.Now);
+        //    rentalManager.Deliver(id, DateTime.Now);
+        //}
+        //private static void RentUpdate()
+        //{
+        //    RentalManager rentalManager = new RentalManager(new EfRentalDal());
+        //    RentalFullList();
+        //    Console.WriteLine("Güncellemek istediğiniz verilerin Rent Id'si: ");
+        //    int id = int.Parse(Console.ReadLine());
+        //    var rentalEntity = rentalManager.Get(id).Data;
+        //    Console.WriteLine(rentalEntity.CarId + " " + rentalEntity.CustomerId + " " + rentalEntity.RentDate + " "+ rentalEntity.ReturnDate);
+        //    Console.WriteLine("");
+        //    CarList();
+        //    Console.Write("Araba Id'si güncelleyiniz: ");
+        //    rentalEntity.CarId = int.Parse(Console.ReadLine());
+        //    CustomerList();
+        //    Console.Write("Müşteri Id'si güncelleyiniz: ");
+        //    rentalEntity.CustomerId = int.Parse(Console.ReadLine());
+        //    Console.Write("Kiralama tarihini güncelleyiniz: ");
+        //    rentalEntity.RentDate = DateTime.Parse(Console.ReadLine());
+        //    Console.Write("Teslim etme tarihini güncelleyiniz. Teslim edilmesiyse boş bırakınız:  ");
+        //    rentalEntity.ReturnDate = DateTime.Parse(Console.ReadLine());
+        //    rentalManager.Update(rentalEntity);
+        //}
+        //private static void ListRentalByCustomerId(int customerId)
+        //{
+        //    RentalManager rentalManager = new RentalManager(new EfRentalDal());
+        //    var rentalEntity = rentalManager.GetRentalDetailsByCustomerId(customerId).Data;
+        //    foreach (var rent in rentalEntity)
+        //    {
+        //        Console.WriteLine(rent.Id + " " + rent.ModelYear + " " + rent.BrandName + " " +rent.Decription + " " + "Kiralanan Firma: " + rent.CompanyName);
+        //    }
+        //}
+        //private static void ListRentalByCarId(int carId)
+        //{
+        //    RentalManager rentalManager = new RentalManager(new EfRentalDal());
+        //    var rentalEntity = rentalManager.GetRentalDetailsByCarId(carId).Data;
+        //    foreach (var rent in rentalEntity)
+        //    {
+        //        Console.WriteLine(rent.Id + " " + rent.ModelYear + " " + rent.BrandName + " " + rent.Decription + " " + "Kiralanan Firma: " + rent.CompanyName);
+        //    }
+        //}
+        //private static void RentalFullList()
+        //{
+        //    RentalManager rentalManager = new RentalManager(new EfRentalDal());
+        //    foreach (var rent in rentalManager.GetRentalDetails().Data)
+        //    {
+        //        Console.WriteLine(rent.Id + " " + rent.ModelYear + " " + rent.BrandName + rent.Decription + " " + "Kiralanan Firma: " + rent.CompanyName + " Kiralama Tarihi: "+ rent.RentDate + " Teslim Edilme Tarihi: " +rent.ReturnDate);
+        //    }
+        //}
+        //private static void RentalReturnDateIsNullList()
+        //{
+        //    RentalManager rentalManager = new RentalManager(new EfRentalDal());
+        //    foreach (var rent in rentalManager.GetRentalDetailsReturnDateIsNull().Data)
+        //    {
+        //        Console.WriteLine(rent.Id + " " + rent.ModelYear + " " + rent.BrandName + rent.Decription + " " + " Kiralanan Firma: " + rent.CompanyName + " Kiralama Tarihi: " + rent.RentDate + " Teslim Edilme Tarihi: " + rent.ReturnDate);
+        //    }
+        //}
 
         //Menu Show
         private static void Menu()
@@ -813,21 +813,21 @@ namespace ConsoleUI
                 switch (selectedMenuItem)
                 {
                     case "Tüm Kiralanmış Araçları Listele":
-                        RentalFullList();
+                        //RentalFullList();
                         Console.WriteLine("");
                         break;
                     case "Müşteriye Göre Listele":
                         CustomerList();
                         Console.Write("Müşteri Id'si: ");
                         int customerId = int.Parse(Console.ReadLine());
-                        ListRentalByCustomerId(customerId);
+                       // ListRentalByCustomerId(customerId);
                         Console.WriteLine("");
                         break;
                     case "Arabaya Göre Listele":
                         CarList();
                         Console.Write("Araba Id'si: ");
                         int carId = int.Parse(Console.ReadLine());
-                        ListRentalByCarId(carId);
+                        //ListRentalByCarId(carId);
                         Console.WriteLine("");
                         break;
                     case "Kiralama İşlemi Ekle":
@@ -840,10 +840,10 @@ namespace ConsoleUI
                         //RentAdd(rental);
                         break;
                     case "Kiralanan Aracı Teslim Al":
-                        RentDeliver();
+                       // RentDeliver();
                         break;
                     case "Kiralama Bilgilerini Güncelle":
-                        RentUpdate();
+                       // RentUpdate();
                         break;
                     case "Çıkış":
                         indexMainMenu = 0;

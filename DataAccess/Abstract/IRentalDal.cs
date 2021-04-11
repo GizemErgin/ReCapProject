@@ -13,6 +13,7 @@ namespace DataAccess.Abstract
         List<RentalDetailDto> GetRentalDetailsReturnDateIsNull();
         List<RentalDetailDto> GetRentalDetailsByCarId(int carId);
         List<RentalDetailDto> GetRentalDetailsByCustomerId(int customerId);
+
         bool CheckCarStatus(int carId, DateTime rentDate, DateTime? returnDate);
     }
 }
